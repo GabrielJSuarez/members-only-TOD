@@ -16,6 +16,13 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+        <% if user_signed_in? %>
+          <td><%= post.user.name %></td>
+          <td><%= post.user.username %></td>
+        <% else %>
+          <td>RESTRICTED</td>
+          <td>RESTRICTED</td>
+        <% end %>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,3 +34,5 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
