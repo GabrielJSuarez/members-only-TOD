@@ -43,7 +43,7 @@ module PostsHelper
   def show_posts(posts)
     posts.each do |p|
       concat(
-        content_tag(:div, nil, class: 'card col-md-5 mx-auto my-4') do
+        content_tag(:div, nil, class: 'card col-md-5 mx-auto my-3') do
           content_tag(:h5, "@#{member?(p)}" , class: 'card-header text-primary') +
               content_tag(:div, nil, class: 'card-body') do
                 content_tag(:h5, p.title, class: 'card-title') +
@@ -61,11 +61,16 @@ module PostsHelper
   end
 
   def show_members
-
-
-
+    @user = User.all
+        content_tag(:div, nil, class: 'card') do
+          content_tag(:div, 'Member List', class: 'card-header') +
+              content_tag(:ul, nil, class: 'list-group list-group-flush') do
+                @user.each do |user|
+                  concat(content_tag(:li, "@#{user.name}", class: 'list-group-item'))
+                end
+              end
+        end
   end
 end
-
 
 
