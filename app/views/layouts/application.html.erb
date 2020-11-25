@@ -10,11 +10,9 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="mx-0 my-0">
+  <body class="px-5 my-0">
     <%= render 'layouts/navbar' %>
-
-        <%= display_propper_flash %>
-
+    <%= flash_messages_bootstrap %>
     <%= yield %>
   </body>
 </html>

@@ -4,6 +4,19 @@ module PostsHelper
     user_signed_in? ? post.user.name : 'RESTRICTED'
   end
 
+  def navbar_signed_in?
+    user_signed_in? ? "#{(current_user.username).capitalize}'s session" : 'Log in'
+  end
+
+  def navbar_user_session
+    if user_signed_in?
+      content_tag(:li, (link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link'), class: 'nav-item')
+    else
+      content_tag(:li, (link_to 'Sign Up', new_user_registration_path, class: 'nav-link'), class: 'nav-item') +
+          content_tag(:li, (link_to 'Sign In', new_user_session_path, class: 'nav-link'), class: 'nav-item')
+    end
+  end
+
   def show_posts(post)
     content_tag(:tbody) do
       post.each do |p|
@@ -25,13 +38,20 @@ module PostsHelper
     end
   end
 
-  def display_propper_flash
+  def flash_messages_bootstrap
+    content = content_tag(:button, content_tag(:span, '&times;'.html_safe, 'aria-hidden' => 'true'), type: 'button', class: 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close')
+    2
     if flash[:notice]
-      content_tag(:div, nil, class: 'row mt-3') do
-        content_tag(:div, content_tag(:div, flash[:notice], class: 'alert alert-success', role: 'alert'), class: 'col-8 mx-auto')
+      content_tag(:div, nil, class: 'alert alert-success alert-dismissible fade show', role: 'alert') do
+        content_tag(:strong, flash[:notice]) + content
+
       end
     elsif flash[:alert]
-      content_tag(:div, flash[:alert], class: 'alert alert-danger', role: 'alert')
+      content_tag(:div, nil, class: 'alert alert-danger alert-dismissible fade show', role: 'alert') do
+        content_tag(:strong, flash[:alert]) + content
+      end
     end
   end
 end
+
+
