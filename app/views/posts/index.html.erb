@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Posts</h1>
 
 <table>
@@ -11,24 +9,7 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <% if user_signed_in? %>
-          <td><%= post.user.name %></td>
-          <td><%= post.user.username %></td>
-        <% else %>
-          <td>RESTRICTED</td>
-          <td>RESTRICTED</td>
-        <% end %>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <%= show_posts(@posts) %>
 </table>
 
 <br>
