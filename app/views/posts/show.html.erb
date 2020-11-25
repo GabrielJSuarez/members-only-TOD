@@ -1,14 +1,15 @@
-
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class="card col-md-6 mx-auto mt-4">
+  <h5 class="card-header">
+    <%= member?(@post) %>
+  </h5>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= @post.title  %>
+    </h5>
+    <p class="card-text">
+      <%= @post.content  %>
+    </p>
+    <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-success text-light mr-2' %>
+    <%= link_to 'Back', posts_path, class: 'btn btn-primary text-light' %>
+  </div>
+</div>

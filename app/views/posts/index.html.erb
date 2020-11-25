@@ -1,19 +1,8 @@
-<h1>Posts</h1>
+<div class="my-3">
+  <%= render 'posts/new-post', post: @post %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= render 'posts/profile' %>
 
-  <%= show_posts(@posts) %>
-</table>
 
-<br>
 
-<%= link_to 'New Post', new_post_path %>
-
-<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
