@@ -1,8 +1,8 @@
  <%= simple_form_for @post do |f| %>
    <% if user_signed_in? %>
-    <div class="media col-md-6 mx-auto">
+    <div class="media">
       <div class="media-body">
-        <h5 class="mt-0">@<%= (current_user.username).capitalize %> <span class="badge badge-primary">member</span> </h5>
+        <h5 class="mt-0">@<%= member?(@post) %> <span class="badge badge-primary">member</span> </h5>
             <%= f.input :title, label: 'Enter the Secret\'s title', placeholder: 'Enter the Secret\'s title' %>
 
             <%= f.input :content, label: 'Enter your secret', input_html: { rows: '5' } %>
@@ -10,5 +10,5 @@
             <%= f.button :submit , class: 'btn btn-primary btn-block my-3' %>
       </div>
     </div>
-   <% end %>
+     <% end %>
  <% end %>

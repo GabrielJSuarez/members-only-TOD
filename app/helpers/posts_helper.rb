@@ -16,7 +16,7 @@ module PostsHelper
   end
 
   def member?(post)
-    user_signed_in? ? post.user.name : 'RESTRICTED'
+    user_signed_in? ? current_user.name.capitalize : 'RESTRICTED'
   end
 
   def navbar_signed_in?
@@ -44,15 +44,26 @@ module PostsHelper
     posts.each do |p|
       concat(
         content_tag(:div, nil, class: 'card col-md-5 mx-auto my-4') do
-          content_tag(:h5, member?(p), class: 'card-header') +
+          content_tag(:h5, "@#{member?(p)}" , class: 'card-header text-primary') +
               content_tag(:div, nil, class: 'card-body') do
                 content_tag(:h5, p.title, class: 'card-title') +
                     content_tag(:p, p.content, class: 'card-content') +
-                    (link_to 'Show Post', p, class: 'btn btn-primary text-light')
+                    if user_signed_in?
+                      (link_to 'Show Post', p, class: 'btn btn-primary text-light mr-2') +
+                          (link_to 'Edit Post', edit_post_path(p), class: 'btn btn-warning text-dark mr-2') +
+                          (link_to 'Delete Post', post_path(p), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger text-light mr-2')
+                    end
+
               end
         end
       )
     end
+  end
+
+  def show_members
+
+
+
   end
 end
 

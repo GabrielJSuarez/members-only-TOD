@@ -1,8 +1,18 @@
-<div class="my-3">
-  <%= render 'posts/new-post', post: @post %>
+<div class="my-5 row">
+  <% if user_signed_in? %>
+    <div class="col-md-3">
+      <%= render 'posts/profile' %>
+    </div>
+    <div class="col-md-6 mx-auto">
+      <%= render 'posts/new-post', post: @post %>
+    </div>
+    <div class="col-md-3 mx-auto">
+      <%= render 'posts/members' %>
+    </div>
+  <% end %>
 </div>
 
-<%= render 'posts/profile' %>
+<%= render 'posts/feed' %>
 
 
 
