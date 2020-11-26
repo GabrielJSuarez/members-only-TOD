@@ -15,12 +15,8 @@ module PostsHelper
     end
   end
 
-  def member?(post)
-    user_signed_in? ? post : 'UNDERCOVER MEMBER'
-  end
-
-  def navbar_signed_in?
-    user_signed_in? ? "#{current_user.username.capitalize}'s session" : 'Log in to your account'
+  def member?(post_user_name)
+    user_signed_in? ? post_user_name : 'UNDERCOVER MEMBER'
   end
 
   def navbar_user_session
@@ -29,6 +25,14 @@ module PostsHelper
     else
       content_tag(:li, (link_to 'Sign Up', new_user_registration_path, class: 'nav-link'), class: 'nav-item') +
         content_tag(:li, (link_to 'Sign In', new_user_session_path, class: 'nav-link'), class: 'nav-item')
+    end
+  end
+
+  def show_creation
+    if user_signed_in?
+      content_tag(:div, (render 'posts/profile'), class: 'col-md-3') +
+          content_tag(:div, (render 'posts/new-post', post: @post), class: 'col-md-6') +
+          content_tag(:div, (render 'posts/members'), class: 'col-md-3')
     end
   end
 
@@ -61,16 +65,38 @@ module PostsHelper
     end
   end
 
+  def user_post?
+    content_tag(:h6, nil, class: 'card-text pt-2') do
+      if current_user.posts.any?
+        current_user.posts.last.content
+      else
+        'Nothing to show'
+      end
+    end
+  end
+
+  def user_post_time?
+    content_tag(:p, nil, class: 'card-text') do
+      content_tag(:small, nil, class: 'text-light') do
+        if current_user.posts.any?
+          "#{time_ago_in_words(current_user.posts.last.created_at)} Ago"
+        else
+          'Nothing created'
+        end
+      end
+    end
+  end
+
   def show_members
     @user = User.all
-        content_tag(:div, nil, class: 'card') do
-          content_tag(:div, 'Member List', class: 'card-header') +
-              content_tag(:ul, nil, class: 'list-group list-group-flush') do
-                @user.each do |user|
-                  concat(content_tag(:li, "@#{user.name}", class: 'list-group-item'))
-                end
-              end
-        end
+    content_tag(:div, nil, class: 'card') do
+      content_tag(:div, 'Member List', class: 'card-header') +
+          content_tag(:ul, nil, class: 'list-group list-group-flush') do
+            @user.each do |user|
+              concat(content_tag(:li, "@#{user.name}", class: 'list-group-item'))
+            end
+          end
+    end
   end
 end
 

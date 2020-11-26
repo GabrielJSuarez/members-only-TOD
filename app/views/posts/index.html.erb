@@ -1,15 +1,5 @@
 <div class="my-3 row">
-  <% if user_signed_in? %>
-    <div class="col-md-3">
-      <%= render 'posts/profile' %>
-    </div>
-    <div class="col-md-6 mx-auto">
-      <%= render 'posts/new-post', post: @post %>
-    </div>
-    <div class="col-md-3 mx-auto">
-      <%= render 'posts/members' %>
-    </div>
-  <% end %>
+  <%= show_creation %>
 </div>
 
 <%= render 'posts/feed' %>
