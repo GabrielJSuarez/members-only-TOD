@@ -1,26 +1,59 @@
 # README
+# Project: Members only!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Build with: 
 
-Things you may want to cover:
+- Bootstrap 4 css implementation for Rails
+- Simple Forms Gem
+- Better Erros Gem
+- Guard Gem
+- Devise Gem
 
-* Ruby version
+Getting started
+Clone the repository to your local machine
 
-* System dependencies
+$ git clone https://github.com/GabrielJSuarez/members-only-TOD.git
 
-* Configuration
+Go to your directory
 
-* Database creation
+$ `cd members-only`
 
-* Database initialization
+Run in terminal [You must have Ruby installed on your system.]
 
-* How to run the test suite
+$ `ruby bundle install`
 
-* Services (job queues, cache servers, search engines, etc.)
+the command bundle install is important to install required gem for the game to start. After you finish type:
 
-* Deployment instructions
+$ `rails server`
 
-* ...
-# members-only-TOD
-# members-only-TOD
+Open your browser to localhost
+
+http://localhost:3000/
+
+Run tests
+Rubocop lint
+
+rubocop .
+
+🤝 Contributing
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the issues page.
+
+Contact
+Project Link:https://github.com/GabrielJSuarez/Micro_Reddit_Microverse_TOD
+
+## Authors
+
+👤 **Gabriel Suárez**
+
+- Github: @ginnandjuice(https://github.com/ginnandjuice)
+- Twitter: [@fatbaxxter](https://twitter.com/fatbaxxter)
+- Linkedin: [Gabriel Suárez](https://www.linkedin.com/in/gabriel-ginn-suarez/)
+
+
+Show your support
+Give a ⭐️ if you like this project!
+
+📝 License
+This project is MIT licensed.
