@@ -16,11 +16,11 @@ module PostsHelper
   end
 
   def member?(post)
-    user_signed_in? ? current_user.name.capitalize : 'RESTRICTED'
+    user_signed_in? ? post : 'UNDERCOVER MEMBER'
   end
 
   def navbar_signed_in?
-    user_signed_in? ? "#{current_user.username.capitalize}'s session" : 'Log in'
+    user_signed_in? ? "#{current_user.username.capitalize}'s session" : 'Log in to your account'
   end
 
   def navbar_user_session
@@ -44,14 +44,15 @@ module PostsHelper
     posts.each do |p|
       concat(
         content_tag(:div, nil, class: 'card col-md-5 mx-auto my-3') do
-          content_tag(:h5, "@#{member?(p)}" , class: 'card-header text-primary') +
+          content_tag(:h5, "@#{member?(p.user.name)}", class: 'card-header text-primary') +
               content_tag(:div, nil, class: 'card-body') do
-                content_tag(:h5, p.title, class: 'card-title') +
-                    content_tag(:p, p.content, class: 'card-content') +
+                    content_tag(:p, p.content, class: 'card-content font-weight-bold content-font') +
                     if user_signed_in?
                       (link_to 'Show Post', p, class: 'btn btn-primary text-light mr-2') +
-                          (link_to 'Edit Post', edit_post_path(p), class: 'btn btn-warning text-dark mr-2') +
-                          (link_to 'Delete Post', post_path(p), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger text-light mr-2')
+                          if p.user == current_user
+                            (link_to 'Edit Post', edit_post_path(p), class: 'btn btn-warning text-dark mr-2') +
+                            (link_to 'Delete Post', post_path(p), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger text-light mr-2')
+                          end
                     end
 
               end

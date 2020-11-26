@@ -1,16 +1,18 @@
 <div class="card col-md-6 mx-auto mt-4">
   <h5 class="card-header">
-    <%= member?(@post) %>
+    <%= member?(@post.user.name) %>
   </h5>
   <div class="card-body">
-    <h5 class="card-title">
-      <%= @post.title  %>
-    </h5>
     <p class="card-text">
       <%= @post.content  %>
     </p>
-    <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-success text-light mr-2' %>
-    <%= link_to 'Back', posts_path, class: 'btn btn-primary text-light mr-2' %>
-    <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger text-light mr-2' %>
+    <% if user_signed_in? %>
+      <%= link_to 'Show Post', p, class: 'btn btn-primary text-light mr-2' %>
+      <%= link_to 'Go Back', root_path, class: 'btn btn-success text-light mr-2' %>
+    <% end %>
+    <% if @post.user == current_user %>
+      <%= link_to 'Edit Post', edit_post_path(@post), class: 'btn btn-warning text-dark mr-2' %>
+      <%=  link_to 'Delete Post', post_path(@post), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger text-light mr-2' %>
+    <% end %>
   </div>
 </div>

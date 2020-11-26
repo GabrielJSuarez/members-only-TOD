@@ -3,10 +3,7 @@
 
   <div class="col-md-4 mx-auto">
     <%= simple_form_for post do |f| %>
-      <%= f.input :title, label: 'Enter the Secret\'s title', placeholder: 'Enter the Secret\'s title' %>
-
-      <%= f.input :content, label: 'Enter your secret', input_html: { rows: '5' } %>
-
+      <%= f.input :content, label: 'Enter your secret', label_html: { class: 'text-center font-weight-bold content-font'}, input_html: { rows: '5' } %>
       <%= f.button :submit , class: 'btn btn-primary btn-block my-3' %>
     <% end %>
   </div>

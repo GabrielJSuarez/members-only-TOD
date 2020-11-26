@@ -8,16 +8,21 @@
         <h4 class="card-title text-dark">
           <%= current_user.name %> Last Post!
         </h4>
-        <h5 class="card-text">
-          <%= current_user.posts.last.title %>
-        </h5>
         <h6 class="card-text pt-2">
-          <%= current_user.posts.last.content %>
+          <% if current_user.posts.any? %>
+            <%= current_user.posts.last.content %>
+          <% else %>
+            <%= 'Nothing to show' %>
+          <% end %>
         </h6>
         <p class="card-text">
           <small class="text-light">
-          <%= time_ago_in_words(current_user.posts.last.created_at) %> ago
-        </small>
+            <% if current_user.posts.any? %>
+              <%= time_ago_in_words(current_user.posts.last.created_at) %> ago
+            <% else %>
+              <%= 'Nothing created' %>
+            <% end %>
+          </small>
         </p>
       </div>
     </div>

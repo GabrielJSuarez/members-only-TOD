@@ -1,13 +1,14 @@
  <%= simple_form_for @post do |f| %>
    <% if user_signed_in? %>
-    <div class="media">
+    <div class="media text-center">
       <div class="media-body">
-        <h5 class="mt-0">@<%= member?(@post) %> <span class="badge badge-primary">member</span> </h5>
-            <%= f.input :title, label: 'Enter the Secret\'s title', placeholder: 'Enter the Secret\'s title' %>
-
-            <%= f.input :content, label: 'Enter your secret', input_html: { rows: '5' } %>
-
-            <%= f.button :submit , class: 'btn btn-primary btn-block my-3' %>
+        <h5 class="mt-0 font-weight-bold">
+          @<%= member?(current_user.name) %> <span class="badge badge-primary">member</span>
+        </h5>
+        <%= f.input :content, label: 'Enter your secret', label_html: { class: 'text-center font-weight-bold content-font'}, input_html: { rows: '5' } %>
+        <div class="text-center">
+          <%= f.button :submit , class: 'btn btn-primary btn-lg my-3' %>
+        </div>
       </div>
     </div>
      <% end %>
